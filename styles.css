@@ -1,0 +1,144 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8; /* Light gray-blue background */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 450px;
+    margin: 20px auto;
+    background-color: #ffffff; /* Crisp white for the container */
+    padding: 20px;
+    border-radius: 12px; /* Rounded corners for a modern look */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+}
+
+h1 {
+    text-align: center;
+    color: #34495e;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-size: 15px;
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #bdc3c7;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: #3498db;
+    background-color: #ffffff;
+    outline: none;
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    background-color: #1abc9c; /* Vibrant teal button */
+    color: #ffffff;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #16a085; /* Darker teal on hover */
+}
+
+.result {
+    margin-top: 20px;
+    background-color: #ecf9f6; /* Light teal background for results */
+    padding: 18px;
+    border-radius: 6px;
+    color: #2c3e50;
+    font-size: 16px;
+    line-height: 1.5;
+    border: 1px solid #1abc9c; /* Teal border */
+}
+
+.result p {
+    margin: 0;
+}
+
+.copyright {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 24px; /* Larger font size */
+    color: #ffffff; /* White color for better visibility */
+    padding: 20px; /* Increased padding */
+    background-color: #3498db; /* Bright blue background */
+    border-radius: 6px;
+    font-weight: 700; /* Bold text for prominence */
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.copyright span {
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
+    color: black; /* Bright yellow-orange for visibility */
+    font-size: 15px; /* Larger font size for text */
+    animation: scroll-left 20s linear infinite; /* Slower scroll */
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@media (max-width: 450px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .result {
+        font-size: 14px;
+    }
+
+    .copyright {
+        font-size: 18px; /* Adjusted font size for small screens */
+        padding: 15px; /* Adjusted padding for smaller screens */
+    }
+}

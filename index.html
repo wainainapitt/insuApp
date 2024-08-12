@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Premium Calculator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+</head>
+<body>
+
+<div class="container">
+    <h1>Insurance Premium Calculator</h1>
+    <form id="insuranceForm">
+        <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            <div class="error" id="nameError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+            <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="policyType">Policy Type:</label>
+            <select id="policyType" name="policyType" required>
+                <option value="">Select a type</option>
+                <option value="health">Health Insurance</option>
+                <option value="life">Life Insurance</option>
+                <option value="auto">Vehicle Insurance</option>
+            </select>
+            <div class="error" id="policyTypeError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="sumInsured">Sum Insured (Kshs):</label>
+            <input type="number" id="sumInsured" name="sumInsured" required>
+            <div class="error" id="sumInsuredError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="rate">Premium Rate (%):</label>
+            <input type="number" id="rate" name="rate" required>
+            <div class="error" id="rateError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="passengers">Number of Passengers:</label>
+            <input type="number" id="passengers" name="passengers" required>
+            <div class="error" id="passengersError"></div>
+        </div>
+
+        <button type="submit">Calculate Premium</button>
+        <button type="button" id="clearButton">Clear Form</button> <!-- Clear Form Button -->
+        <button type="button" id="printButton">Print Results</button> <!-- Print Results Button -->
+    </form>
+
+    <div class="result" id="result"></div>
+</div>
+
+<div class="copyright">
+    <span>&copy; 2024 Wainaina Ngugi. All rights reserved.</span>
+</div>
+
+<script>
+    document.getElementById('insuranceForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+
+        // Clear previous errors
+        document.getElementById('nameError').innerText = '';
+        document.getElementById('emailError').innerText = '';
+        document.getElementById('policyTypeError').innerText = '';
+        document.getElementById('sumInsuredError').innerText = '';
+        document.getElementById('rateError').innerText = '';
+        document.getElementById('passengersError').innerText = '';
+        document.getElementById('result').innerText = ''; // Clear previous result
+
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const policyType = document.getElementById('policyType').value;
+        const sumInsured = parseFloat(document.getElementById('sumInsured').value);
+        const rate = parseFloat(document.getElementById('rate').value) / 100; // Convert percentage to decimal
+        const passengers = parseInt(document.getElementById('passengers').value);
+
+        // Basic validation
+        let hasError = false;
+
+        if (!name) {
+            document.getElementById('nameError').innerText = 'Please enter your name.';
+            hasError = true;
+        }
+        if (!email) {
+            document.getElementById('emailError').innerText = 'Please enter your email.';
+            hasError = true;
+        }
+        if (!policyType) {
+            document.getElementById('policyTypeError').innerText = 'Please select a policy type.';
+            hasError = true;
+        }
+        if (!sumInsured || sumInsured <= 0) {
+            document.getElementById('sumInsuredError').innerText = 'Please enter a valid sum insured.';
+            hasError = true;
+        }
+        if (!rate || rate <= 0) {
+            document.getElementById('rateError').innerText = 'Please enter a valid premium rate.';
+            hasError = true;
+        }
+        if (!passengers || passengers <= 0) {
+            document.getElementById('passengersError').innerText = 'Please enter a valid number of passengers.';
+            hasError = true;
+        }
+
+        // If there are no errors, calculate the premiums
+        if (!hasError) {
+            const pll = 500; // per passenger
+            const extraRate = 0.0025; // 0.25%
+            const levyRate = 0.0045; // 0.45%
+
+            // Calculate Premiums
+            const basePremium = sumInsured * rate; // Rate calculation
+            const pllPremium = pll * passengers; // Pll calculation
+            const extraPremium = sumInsured * extraRate; // Extra calculation
+            const totalPremium = basePremium + pllPremium + extraPremium; // Total premium
+
+            const levies = totalPremium * levyRate; // Levies calculation
+            const grandPremium = totalPremium + levies; // Grand premium calculation
+
+            // Display the results
+            document.getElementById('result').innerText = `Premium Details:
+- Base Premium: Kshs ${basePremium.toFixed(2)}
+- Pll Premium: Kshs ${pllPremium.toFixed(2)}
+- Extra Premium: Kshs ${extraPremium.toFixed(2)}
+- Total Premium: Kshs ${totalPremium.toFixed(2)}
+- Levies: Kshs ${levies.toFixed(2)}
+- Grand Premium: Kshs ${grandPremium.toFixed(2)}`;
+        }
+    });
+
+    // Clear form function
+    document.getElementById('clearButton').addEventListener('click', function() {
+        document.getElementById('insuranceForm').reset(); // Reset form fields
+        document.getElementById('result').innerText = ''; // Clear results
+        // Clear previous errors
+        document.getElementById('nameError').innerText = '';
+        document.getElementById('emailError').innerText = '';
+        document.getElementById('policyTypeError').innerText = '';
+        document.getElementById('sumInsuredError').innerText = '';
+        document.getElementById('rateError').innerText = '';
+        document.getElementById('passengersError').innerText = '';
+    });
+
+    // Print function
+    document.getElementById('printButton').addEventListener('click', function() {
+        window.print(); // Trigger the print dialog
+    });
+</script>
+
+</body>
+</html>
